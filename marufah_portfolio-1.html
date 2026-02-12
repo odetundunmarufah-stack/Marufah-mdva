@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marufah Odetundun, MD — Medical Virtual Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --navy-mid: #1A3556;
+    --blue: #1C5F9B;
+    --blue-light: #2E82CC;
+    --teal: #0D8B8B;
+    --cream: #F7F4EF;
+    --cream-dark: #EDE8DF;
+    --white: #FFFFFF;
+    --text: #1A1A2E;
+    --text-mid: #3D4B5C;
+    --text-light: #6B7A8D;
+    --gold: #C8972A;
+    --gold-light: #E8C06A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(11, 31, 58, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-brand {
+    font-family: 'DM Serif Display', serif;
+    color: var(--white);
+    font-size: 17px;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-brand span { color: var(--gold-light); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 48px 80px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(28, 95, 155, 0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(13, 139, 139, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 80% 10%, rgba(200, 151, 42, 0.1) 0%, transparent 50%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(200, 151, 42, 0.15);
+    border: 1px solid rgba(200, 151, 42, 0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: 28px;
+    color: var(--gold-light);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 6px;
+  }
+
+  .hero-name-md {
+    color: var(--gold-light);
+  }
+
+  .hero-title {
+    font-size: 18px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    margin-bottom: 28px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-pitch {
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+    max-width: 520px;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .hero-pitch strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold);
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(200,151,42,0.3);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 14px 28px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.06);
+  }
+
+  /* Hero stats card */
+  .hero-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 36px 32px;
+    backdrop-filter: blur(8px);
+  }
+
+  .hero-card-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 28px;
+    font-weight: 600;
+  }
+
+  .stat-item {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .stat-item:last-child { border-bottom: none; }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-number span { color: var(--gold-light); }
+
+  .stat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+  }
+
+  .hero-location {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    padding: 96px 48px;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--blue);
+  }
+
+  .section-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* ── WHY MD SECTION ── */
+  .why-section {
+    background: var(--white);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 56px;
+  }
+
+  .why-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 36px;
+    border-left: 3px solid var(--blue);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .why-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(11,31,58,0.08);
+  }
+
+  .why-card-icon {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .why-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+
+  .why-card p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-mid);
+    font-weight: 300;
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience-section {
+    background: var(--cream);
+  }
+
+  .timeline {
+    margin-top: 56px;
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--blue), var(--teal));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 56px;
+    padding-left: 40px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -39px; top: 10px;
+    width: 14px; height: 14px;
+    background: var(--white);
+    border: 2px solid var(--blue);
+    border-radius: 50%;
+  }
+
+  .timeline-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+
+  .timeline-date {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--blue);
+    text-transform: uppercase;
+    background: rgba(28,95,155,0.1);
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .timeline-type {
+    font-size: 12px;
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  .timeline-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .timeline-org {
+    font-size: 14px;
+    color: var(--text-mid);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .timeline-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .timeline-bullets li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-mid);
+    padding-left: 20px;
+    position: relative;
+    font-weight: 300;
+  }
+
+  .timeline-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-weight: 600;
+  }
+
+  .metric-highlight {
+    display: inline-block;
+    background: rgba(13,139,139,0.1);
+    color: var(--teal);
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ── SKILLS ── */
+  .skills-section {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  .skills-section .section-label { color: var(--gold-light); }
+  .skills-section .section-label::before { background: var(--gold-light); }
+  .skills-section .section-heading { color: var(--white); }
+  .skills-section .section-sub { color: rgba(255,255,255,0.55); }
+
+  .niche-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200,151,42,0.15);
+    border: 1px solid rgba(200,151,42,0.35);
+    color: var(--gold-light);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 100px;
+    margin-top: 20px;
+    margin-bottom: 56px;
+    letter-spacing: 0.04em;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .skill-group {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 12px;
+    padding: 28px;
+    transition: background 0.2s;
+  }
+
+  .skill-group:hover {
+    background: rgba(255,255,255,0.08);
+  }
+
+  .skill-group-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .skill-tag-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .skill-tag {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    padding: 7px 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    font-weight: 300;
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    background: rgba(255,255,255,0.09);
+    color: var(--white);
+  }
+
+  /* ── WORK SAMPLES ── */
+  .samples-section {
+    background: var(--white);
+  }
+
+  .samples-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .sample-card {
+    border: 1px solid var(--cream-dark);
+    border-radius: 12px;
+    padding: 28px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .sample-card:hover {
+    border-color: var(--blue-light);
+    box-shadow: 0 8px 32px rgba(28,95,155,0.1);
+    transform: translateY(-2px);
+  }
+
+  .sample-icon {
+    width: 48px; height: 48px;
+    background: var(--cream);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    border: 1px solid var(--cream-dark);
+  }
+
+  .sample-content h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .sample-content p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-mid);
+    font-weight: 300;
+    margin-bottom: 12px;
+  }
+
+  .sample-link {
+    font-size: 12px;
+    color: var(--blue);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .sample-link:hover { color: var(--blue-light); }
+
+  /* ── CREDENTIALS ── */
+  .credentials-section {
+    background: var(--cream);
+  }
+
+  .credentials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 56px;
+  }
+
+  .credential-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    border: 1px solid var(--cream-dark);
+    transition: all 0.2s;
+  }
+
+  .credential-card:hover {
+    border-color: rgba(28,95,155,0.2);
+    box-shadow: 0 4px 20px rgba(11,31,58,0.06);
+  }
+
+  .credential-card.featured {
+    grid-column: 1 / -1;
+    background: var(--navy);
+    border-color: transparent;
+  }
+
+  .credential-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .credential-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .credential-card.featured h3 { color: var(--white); }
+
+  .credential-card p {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .credential-card.featured p { color: rgba(255,255,255,0.6); }
+
+  .credential-card .edu-year {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── WORK READINESS ── */
+  .readiness-section {
+    background: var(--white);
+  }
+
+  .readiness-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 56px;
+  }
+
+  .readiness-card {
+    text-align: center;
+    padding: 32px 20px;
+    background: var(--cream);
+    border-radius: 12px;
+    border: 1px solid var(--cream-dark);
+    transition: all 0.2s;
+  }
+
+  .readiness-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(11,31,58,0.08);
+    border-color: rgba(28,95,155,0.2);
+  }
+
+  .readiness-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+
+  .readiness-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .readiness-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    padding: 100px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(28,95,155,0.3) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 30% at 10% 90%, rgba(13,139,139,0.2) 0%, transparent 60%);
+  }
+
+  .cta-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+  }
+
+  .cta-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .cta-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.75;
+    margin-bottom: 44px;
+    font-weight: 300;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .cta-contacts {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .cta-contact-item:hover { color: var(--white); }
+
+  .cta-contact-item span {
+    font-size: 16px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060F1C;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+  }
+
+  footer a {
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: rgba(255,255,255,0.7); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in:nth-child(1) { animation-delay: 0.1s; }
+  .fade-in:nth-child(2) { animation-delay: 0.2s; }
+  .fade-in:nth-child(3) { animation-delay: 0.3s; }
+  .fade-in:nth-child(4) { animation-delay: 0.4s; }
+  .fade-in:nth-child(5) { animation-delay: 0.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-content { grid-template-columns: 1fr; }
+    .hero-card { display: none; }
+    .section { padding: 64px 24px; }
+    .why-grid, .skills-grid, .credentials-grid { grid-template-columns: 1fr; }
+    .samples-grid { grid-template-columns: 1fr; }
+    .readiness-grid { grid-template-columns: 1fr 1fr; }
+    .cta-section { padding: 64px 24px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Marufah Odetundun, <span>MD</span></div>
+  <ul class="nav-links">
+    <li><a href="#why">Why MD</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#samples">Work Samples</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-eyebrow fade-in">Medical Virtual Assistant</div>
+      <h1 class="hero-name fade-in">Marufah<br>Odetundun, <span class="hero-name-md">MD</span></h1>
+      <p class="hero-title fade-in">Remote Clinical Support &nbsp;·&nbsp; US EST/CST/PST Friendly &nbsp;·&nbsp; GMT+1</p>
+      <p class="hero-pitch fade-in">
+        Most medical virtual assistants have administrative training. I have both — plus a <strong>medical degree</strong>. With 2+ years of hands-on clinical experience, I bring <strong>physician-level understanding</strong> to every chart, referral, and patient interaction I support.
+      </p>
+      <div class="hero-actions fade-in">
+        <a href="https://calendly.com/marufah-mdva/30min" target="_blank" class="btn-primary">📅 Book a Free Discovery Call</a>
+        <a href="#samples" class="btn-secondary">View Work Samples →</a>
+      </div>
+      <div class="hero-location fade-in">
+        <span>📍</span> Nigeria (GMT+1) &nbsp;·&nbsp; Available for US clients remotely
+      </div>
+    </div>
+
+    <div class="hero-card fade-in">
+      <p class="hero-card-title">By The Numbers</p>
+      <div class="stat-item">
+        <div class="stat-number">2<span>+</span></div>
+        <div class="stat-label">Years of clinical experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">60<span>%</span></div>
+        <div class="stat-label">Reduction in documentation delays (UITH)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">40<span>–50</span></div>
+        <div class="stat-label">Patient records managed per rotation</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">15<span>–20</span></div>
+        <div class="stat-label">Outpatient encounters documented daily</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY MD -->
+<section class="section why-section" id="why">
+  <div class="section-inner">
+    <p class="section-label">The Difference</p>
+    <h2 class="section-heading">Why Hire an MD<br>as Your Virtual Assistant?</h2>
+    <p class="section-sub">When your VA has a medical degree, the entire standard of support changes.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card-icon">📋</div>
+        <h3>Documentation Without Errors</h3>
+        <p>I catch what non-clinical VAs miss — incorrect terminology, incomplete HPI, missing diagnoses. Notes are provider-ready because I understand what providers need.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">🧠</div>
+        <h3>Clinical Context, Never Lost</h3>
+        <p>Referral summaries, prior auth justifications, and patient communications are written with genuine medical understanding — not templated guesswork.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">⏱️</div>
+        <h3>Less Correction, More Care</h3>
+        <p>Your provider spends less time fixing documentation and more time with patients. Physician-reviewed accuracy built in from the start.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-icon">🔒</div>
+        <h3>HIPAA-Aware by Training</h3>
+        <p>PHI protection and data privacy aren't just compliance checkboxes for me — they're part of how I practiced medicine. Certified in HIPAA, reinforced by clinical experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section experience-section" id="experience">
+  <div class="section-inner">
+    <p class="section-label">Clinical Background</p>
+    <h2 class="section-heading">2+ Years of Real<br>Clinical Experience</h2>
+    <p class="section-sub">Every role directly maps to the virtual support skills your practice needs.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <span class="timeline-date">June 2025 – Present</span>
+          <span class="timeline-type">Primary Care & Preventive Medicine</span>
+        </div>
+        <h3 class="timeline-role">Medical Officer</h3>
+        <p class="timeline-org">Ilorin South Primary Health Center, Ilorin</p>
+        <ul class="timeline-bullets">
+          <li>Supported outpatient clinical documentation and preventive care tracking, improving follow-up completion and continuity of care</li>
+          <li>Prepared concise referral summaries and care coordination notes, reducing information gaps during specialist handoffs</li>
+          <li>Managed patient communication and follow-up education, supporting adherence to care plans and return visits</li>
+          <li>Tracked outstanding care needs and action items, reducing missed follow-ups and unresolved clinical tasks</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <span class="timeline-date">Jan 2025 – Jun 2025</span>
+          <span class="timeline-type">Outpatient & General Practice</span>
+        </div>
+        <h3 class="timeline-role">Medical Officer</h3>
+        <p class="timeline-org">Gracevid Hospital, Ilorin</p>
+        <ul class="timeline-bullets">
+          <li>Documented and organized clinical records for an average of <span class="metric-highlight">15–20 outpatient encounters daily</span>, ensuring accuracy and completeness</li>
+          <li>Prepared discharge summaries and referral letters, reducing delays in patient transitions of care</li>
+          <li>Coordinated laboratory requests, pharmacy orders, and patient follow-ups, improving turnaround time and reducing provider back-and-forth</li>
+          <li>Maintained structured patient records that supported faster clinical decision-making</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-meta">
+          <span class="timeline-date">Jan 2024 – Jan 2025</span>
+          <span class="timeline-type">Internal Medicine · Surgery · Pediatrics · OB/GYN</span>
+        </div>
+        <h3 class="timeline-role">House Officer (Clinical Intern)</h3>
+        <p class="timeline-org">University of Ilorin Teaching Hospital, Ilorin</p>
+        <ul class="timeline-bullets">
+          <li>Designed and implemented a structured tracking system that reduced documentation and data compilation delays by <span class="metric-highlight">approximately 60%</span></li>
+          <li>Maintained accurate records for <span class="metric-highlight">40–50 patients per rotation</span>, supporting continuity and multidisciplinary communication</li>
+          <li>Supported medication reconciliation and specialist consult coordination for <span class="metric-highlight">30+ patients monthly</span>, reducing missed orders and delays</li>
+          <li>Documented daily progress notes and care plans to support efficient team-based workflows</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section skills-section" id="skills">
+  <div class="section-inner">
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-heading">Core Skills &<br>Specializations</h2>
+    <p class="section-sub">Covering the full scope of remote clinical support for outpatient and telehealth practices.</p>
+    <div class="niche-badge">✦ Specializing in: Primary Care & Telehealth Practices</div>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <p class="skill-group-title">📋 Clinical Documentation & EMR</p>
+        <div class="skill-tag-list">
+          <div class="skill-tag">SOAP Notes & HPI Documentation</div>
+          <div class="skill-tag">Medical Charting & Chart Review</div>
+          <div class="skill-tag">ICD-10 Coding Support</div>
+          <div class="skill-tag">EMR/EHR Data Entry</div>
+          <div class="skill-tag">Athenahealth · Epic · Elation</div>
+          <div class="skill-tag">Lab Interpretation & Care Gap Tracking</div>
+          <div class="skill-tag">Clinical Data Accuracy & Audit</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">🤝 Patient Care & Coordination</p>
+        <div class="skill-tag-list">
+          <div class="skill-tag">Patient Scheduling & Follow-up</div>
+          <div class="skill-tag">Telephony & Patient Triage Support</div>
+          <div class="skill-tag">Referral Coordination & Tracking</div>
+          <div class="skill-tag">Telehealth Technical Assistance</div>
+          <div class="skill-tag">Patient Intake & Demographics</div>
+          <div class="skill-tag">Patient Communication & Education</div>
+          <div class="skill-tag">Prior Authorization Documentation</div>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">🔒 Compliance & Tools</p>
+        <div class="skill-tag-list">
+          <div class="skill-tag">HIPAA Compliance & PHI Protection</div>
+          <div class="skill-tag">Medical Necessity Review</div>
+          <div class="skill-tag">Insurance Verification & Billing Support</div>
+          <div class="skill-tag">Google Workspace · Zoom · Slack</div>
+          <div class="skill-tag">Microsoft Teams</div>
+          <div class="skill-tag">Secure Remote Clinical Operations</div>
+          <div class="skill-tag">Remote Workflow Optimization</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK SAMPLES -->
+<section class="section samples-section" id="samples">
+  <div class="section-inner">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-heading">Work Samples</h2>
+    <p class="section-sub">Real examples of the clinical and administrative work I deliver.</p>
+
+    <div class="samples-grid">
+      <a href="https://drive.google.com/file/d/1ooevF-O62PTpRSLx2rj7W405X1zAWTaG/view?usp=drivesdk" target="_blank" class="sample-card">
+        <div class="sample-icon">📋</div>
+        <div class="sample-content">
+          <h3>SOAP Notes & Clinical Documentation</h3>
+          <p>Drafted during outpatient consultations covering primary care and general practice. Formatted for direct EMR entry with ICD-10 coding support and provider-ready clarity.</p>
+          <span class="sample-link">View SOAP Sample PDF →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/file/d/1NdrgXN1tM36tLuljQB9yC7_JPc7zyi8n/view?usp=drivesdk" target="_blank" class="sample-card">
+        <div class="sample-icon">📄</div>
+        <div class="sample-content">
+          <h3>Prior Authorization Documentation</h3>
+          <p>Medical necessity summaries and diagnosis coding support to streamline payer approvals, including condition-specific justifications aligned with payer criteria.</p>
+          <span class="sample-link">View Prior Auth Sample PDF →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/file/d/1gW8mZOQ4MzXinnxUghmgLkeFzPDJ4cr_/view?usp=drivesdk" target="_blank" class="sample-card">
+        <div class="sample-icon">🏥</div>
+        <div class="sample-content">
+          <h3>Insurance Verification</h3>
+          <p>Detailed eligibility checks and benefits confirmation covering deductible status, copay amounts, network participation, and prior auth requirements.</p>
+          <span class="sample-link">View Verification Sample PDF →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/file/d/18RBSIx14gKDhvjnIWR_c1vJk61C36jDx/view?usp=drivesdk" target="_blank" class="sample-card">
+        <div class="sample-icon">👤</div>
+        <div class="sample-content">
+          <h3>Patient Intake & Demographics</h3>
+          <p>Organized data capture templates for seamless EMR integration and patient onboarding, ensuring complete and consistent information from first contact.</p>
+          <span class="sample-link">View Intake Sample PDF →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/file/d/1J5xnkORq7OxW1aKbq_JkngLsjwDC39No/view?usp=drivesdk" target="_blank" class="sample-card">
+        <div class="sample-icon">💬</div>
+        <div class="sample-content">
+          <h3>Patient Communication Templates</h3>
+          <p>Professional outreach templates for appointment reminders, care plan follow-ups, and test result notifications — clinically accurate and patient-friendly.</p>
+          <span class="sample-link">View Templates PDF →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/file/d/1J051hSSxIv7Sq__DaZawuiLW4kNH0uyM/view?usp=drivesdk" target="_blank" class="sample-card">
+        <div class="sample-icon">💻</div>
+        <div class="sample-content">
+          <h3>Telehealth Workflow Support</h3>
+          <p>End-to-end virtual visit preparation including pre-visit documentation review, room readiness, and post-visit follow-up coordination for telehealth practices.</p>
+          <span class="sample-link">View Telehealth Sample PDF →</span>
+        </div>
+      </a>
+
+      <a href="https://drive.google.com/file/d/19Ah1bWB_WrvVNrP4ydHPziQWRhy3r3Qe/view?usp=drivesdk" target="_blank" class="sample-card" style="grid-column: 1 / -1;">
+        <div class="sample-icon">🔄</div>
+        <div class="sample-content">
+          <h3>Referral Tracking & Coordination</h3>
+          <p>Structured logs for outbound referrals and specialist follow-ups ensuring closed-loop care. Includes status tracking, pending action flags, and communication records to prevent referrals from falling through the cracks.</p>
+          <span class="sample-link">View Referral Log PDF →</span>
+        </div>
+      </a>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section class="section credentials-section" id="credentials">
+  <div class="section-inner">
+    <p class="section-label">Qualifications</p>
+    <h2 class="section-heading">Credentials &<br>Certifications</h2>
+
+    <div class="credentials-grid">
+      <div class="credential-card featured">
+        <div class="credential-icon">🎓</div>
+        <div>
+          <h3>MBBS — Bachelor of Medicine, Bachelor of Surgery</h3>
+          <p>University of Ilorin, Nigeria. Advanced clinical foundation including diagnostic reasoning, patient management, and multidisciplinary care coordination across all major specialties.</p>
+          <span class="edu-year">Graduated 2023</span>
+        </div>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-icon">✅</div>
+        <div>
+          <h3>Certified Medical Virtual Assistant</h3>
+          <p>Udemy, 2026 — Specialized training in US outpatient and telehealth remote workflows, clinical documentation support, and virtual patient care coordination.</p>
+        </div>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-icon">🔒</div>
+        <div>
+          <h3>HIPAA Compliance Certification</h3>
+          <p>HIPAA Training.US — Trained in US healthcare privacy standards, PHI protection, and compliant remote clinical operations.</p>
+        </div>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-icon">💻</div>
+        <div>
+          <h3>Virtual Assistant Certification</h3>
+          <p>Express Tech Academy, 2025 — Remote tools, workflow automation, and professional digital communication for virtual client management.</p>
+        </div>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-icon">🌐</div>
+        <div>
+          <h3>Remote Work Etiquette & Digital Literacy</h3>
+          <p>Her Growth Hub, 2025 — Professional remote work standards, digital collaboration tools, and virtual client relationship management.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK READINESS -->
+<section class="section readiness-section">
+  <div class="section-inner">
+    <p class="section-label">Infrastructure</p>
+    <h2 class="section-heading">Built for Remote.<br>Built for Reliability.</h2>
+    <p class="section-sub">US clients shouldn't worry about connectivity or availability — so I've made sure they won't.</p>
+
+    <div class="readiness-grid">
+      <div class="readiness-card">
+        <div class="readiness-icon">⚙️</div>
+        <p class="readiness-title">Hardware</p>
+        <p class="readiness-desc">High-performance setup optimized for remote clinical tasks with noise-canceling headset</p>
+      </div>
+      <div class="readiness-card">
+        <div class="readiness-icon">📶</div>
+        <p class="readiness-title">Connectivity</p>
+        <p class="readiness-desc">High-speed, stable internet with a dedicated backup connection for uninterrupted availability</p>
+      </div>
+      <div class="readiness-card">
+        <div class="readiness-icon">🔋</div>
+        <p class="readiness-title">Reliability</p>
+        <p class="readiness-desc">Redundant power systems (UPS/Inverter) for 100% service continuity — no downtime</p>
+      </div>
+      <div class="readiness-card">
+        <div class="readiness-icon">🕐</div>
+        <p class="readiness-title">Availability</p>
+        <p class="readiness-desc">Fully aligned with US EST/CST/PST business hours from GMT+1</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="connect">
+  <div class="cta-inner">
+    <p class="cta-label">Ready to Work Together?</p>
+    <h2 class="cta-heading">Ready to bring physician-level precision to your practice?</h2>
+    <p class="cta-sub">Clinics and healthcare teams looking for HIPAA-aware, MD-led remote support — let's talk. Book a free 15-minute discovery call and see how I can support your team.</p>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/marufah-mdva/30min" target="_blank" class="btn-primary">📅 Book a Free Discovery Call</a>
+      <a href="/cdn-cgi/l/email-protection#600d0112150601084e0d04160120070d01090c4e030f0d" class="btn-secondary">✉️ Send an Email</a>
+    </div>
+    <div class="cta-contacts">
+      <a href="/cdn-cgi/l/email-protection#ddb0bcafa8bbbcb5f3b0b9abbc9dbab0bcb4b1f3beb2b0" class="cta-contact-item">
+        <span>📧</span> <span class="__cf_email__" data-cfemail="dcb1bdaea9babdb4f2b1b8aabd9cbbb1bdb5b0f2bfb3b1">[email&#160;protected]</span>
+      </a>
+      <a href="https://linkedin.com/in/marufah-odetundun-md" target="_blank" class="cta-contact-item">
+        <span>🔗</span> linkedin.com/in/marufah-odetundun-md
+      </a>
+      <a href="tel:+2348147119371" class="cta-contact-item">
+        <span>📱</span> +234 814 711 9371
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>©
